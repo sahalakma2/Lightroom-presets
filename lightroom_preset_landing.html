@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Pro - Premium Lightroom Presets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', serif;
+            background: linear-gradient(135deg, #fdf6e3 0%, #e0f7fa 50%, #333333 100%);
+            color: #333333;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #333333, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #555555;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #444444;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .preset-showcase {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px #ffe082;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .preset-showcase:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 35px 80px rgba(0, 188, 212, 0.3);
+        }
+
+        .preset-showcase img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+
+        .preset-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 193, 7, 0.3), rgba(78, 205, 196, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preset-showcase:hover .preset-overlay {
+            opacity: 1;
+        }
+
+        .preview-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #ffe082;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 188, 212, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: #fff8e1;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #333333, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: #fffde7;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: #fff9c4;
+            border-color: rgba(0, 188, 212, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333333;
+        }
+
+        .feature-description {
+            color: #555555;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+        }
+
+        .pricing-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), #fffde7);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff9800, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .price-subtitle {
+            color: #555555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .price-features li {
+            padding: 10px 0;
+            color: #444444;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .price-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00bcd4;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffe082;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            color: #555555;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 30%; left: 5%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element" style="width: 100px; height: 100px; background: linear-gradient(45deg, #ff9800, #00bcd4); border-radius: 50%; filter: blur(3px);"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; background: linear-gradient(45deg, #00bcd4, #ff9800); border-radius: 50%; filter: blur(2px);"></div>
+    <div class="floating-element" style="width: 60px; height: 60px; background: linear-gradient(45deg, #ff9800, #00bcd4); border-radius: 50%; filter: blur(4px);"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Movie Buffet</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Premium Lightroom Bundle</h1>
+                        <p class="hero-subtitle">Transform your photos into cinematic masterpieces</p>
+                        <p class="hero-description">
+                            Discover our premium collection of 25 professional Lightroom presets designed by award-winning photographers. Create stunning, moody, and cinematic looks that will make your photos stand out from the crowd.
+                        </p>
+                        <div id="mobile-upi">
+                            <a href="upi://pay?pa=sahal.5@superyes&pn=MovieBuffet&am=149&cu=INR" class="cta-button">Get Presets Now - 149/-</a>
+                              Pay with UPI (Mobile)
+                            </a>
+                            <p style="font-size: 0.9rem; color: gray; margin-top: 10px;">
+                              ⚠️ Works only on mobile with UPI apps like GPay, PhonePe, Paytm
+                            </p>
+                          </div>
+                          
+                          <div id="desktop-qr" style="display: none; text-align: center;">
+                            <img src="/image 1.png" alt="Scan to Pay" style="width: 200px; margin-bottom: 10px;">
+                            <p>Scan with any UPI app to pay ₹149</p>
+                          </div>
+                          
+                        
+
+                    </div>
+                    <div class="hero-image">
+                        <div class="preset-showcase">
+                            <img src="/image 2.png">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">What You Get</h2>
+                <div class="features-grid">
+                    <div class="feature-card" style="animation: fadeInUp 0.6s ease-out 0.2s both;">
+                        <div class="feature-icon">🎬</div>
+                        <h3 class="feature-title">10 Professional Presets</h3>
+                        <p class="feature-description">
+                            Carefully crafted presets that give your photos that coveted cinematic look. From moody landscapes to vibrant portraits.
+                        </p>
+                    </div>
+                    <div class="feature-card" style="animation: fadeInUp 0.6s ease-out 0.4s both;">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">One-Click Magic</h3>
+                        <p class="feature-description">
+                            Transform your photos instantly with a single click. Save hours of editing time while achieving professional results.
+                        </p>
+                    </div>
+                    <div class="feature-card" style="animation: fadeInUp 0.6s ease-out 0.6s both;">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Mobile & Desktop</h3>
+                        <p class="feature-description">
+                            Compatible with both Lightroom Classic and Lightroom Mobile. Edit on any device, anywhere, anytime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title">Get Started Today</h2>
+                <div class="pricing-card">
+                    <div class="price">Only 149</div>
+                    <p class="price-subtitle">One-time purchase, lifetime access</p>
+                    <ul class="price-features">
+                        <li>25 Premium Cinematic Presets</li>
+                        <li>Lightroom Classic & Mobile Compatible</li>
+                        <li>Step-by-step Installation Guide</li>
+                        <li>Before & After Examples</li>
+                        <li>Commercial License Included</li>
+                        <li>Instant Download</li>
+                        <li>30-Day Money Back Guarantee</li>
+                    </ul>
+                    <a href="#" class="cta-button" onclick="handlePurchase()">Purchase Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Movie Buffet. All rights reserved. | Transform your photography today.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrolled = window.pageYOffset;
+            const opacity = Math.min(scrolled / 100, 0.95);
+            header.style.background = `rgba(15, 15, 15, ${opacity})`;
+        });
+
+        // Purchase button handler
+        function handlePurchase() {
+            alert('🎉 Thank you for your interest! In a real implementation, this would redirect to a payment processor like Stripe, PayPal, or Gumroad.');
+        }
+
+        // Add parallax effect to floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            floatingElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.2);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+        function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  window.onload = function () {
+    if (isMobile()) {
+      document.getElementById('mobile-upi').style.display = 'block';
+      document.getElementById('desktop-qr').style.display = 'none';
+    } else {
+      document.getElementById('mobile-upi').style.display = 'none';
+      document.getElementById('desktop-qr').style.display = 'block';
+    }
+  }
+    </script>
+</body>
+</html>
